@@ -7,7 +7,8 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import {createSwitchNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -20,14 +21,40 @@ type Props = {};
 export default class App extends Component<Props> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <AppContainer/>
     );
   }
 }
+
+
+ class WelcomeScreen extends Component {
+  render() {
+    return (
+       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Button title="Login" onPress={()=> this.props.navigation.navigate('Dashboard')}/>
+        <Button title="Sign Up" onPress={()=> this.props.navigation.navigate('Dashboard')}/>
+      </View>
+    )
+  }
+}
+
+class DashboardScreen extends Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text> Dashboard </Text>
+      </View>
+    )
+  }
+}
+
+
+const AppSwitchNavigator = createSwitchNavigator({
+  Welcome: { screen: WelcomeScreen },
+  Dashboard: { screen: DashboardScreen }
+});
+
+const AppContainer = createAppContainer(AppSwitchNavigator);
 
 const styles = StyleSheet.create({
   container: {
