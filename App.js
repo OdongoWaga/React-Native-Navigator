@@ -53,7 +53,7 @@ class Feed extends Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text> Feed </Text>
+          <Button title="Details" onPress={()=> this.props.navigation.navigate('Details')}/>
       </View>
     )
   }
@@ -98,7 +98,8 @@ const DashboardStackNavigator =createStackNavigator({
 }, {
   defaultNavigationOptions: ({ navigation}) => {
     return {
-      headerLeft: <Icon style={{paddingLeft: 10}} name="md-menu" size={30} />
+      headerLeft: <Text style={{ paddingLeft: 10 }}
+      onPress={() => navigation.openDrawer()}> View </Text>
     }
   }
 })
