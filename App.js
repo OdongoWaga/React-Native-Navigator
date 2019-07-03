@@ -77,10 +77,21 @@ class Settings extends Component {
   }
 }
 
+const Detail = props => (
+  <View style={{flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+  <Text> Detail </Text>
+  </View>
+)
+
+const FeedStack = createSwitchNavigator({
+  Feed,
+  Detail
+})
+
 
 
 const DashboardTabNavigator= createBottomTabNavigator({
-  Feed, 
+  FeedStack, 
   Profile,
   Settings
 }, {
