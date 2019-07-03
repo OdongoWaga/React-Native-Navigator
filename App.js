@@ -8,7 +8,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
-import {createSwitchNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
+import {createSwitchNavigator, createAppContainer, createDrawerNavigator, createBottomTabNavigator, createStackNavigator} from 'react-navigation';
+import Icon from 'react-native-vector-icons';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -48,8 +49,62 @@ class DashboardScreen extends Component {
   }
 }
 
+class Feed extends Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text> Feed </Text>
+      </View>
+    )
+  }
+}
+class Profile extends Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text> Profile </Text>
+      </View>
+    )
+  }
+}
+class Settings extends Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text> Settings </Text>
+      </View>
+    )
+  }
+}
+
+
+
+const DashboardTabNavigator= createBottomTabNavigator({
+  Feed, 
+  Profile,
+  Settings
+}, {
+  navigationOptions:({navigation})=> {
+    //gets us index of the active tab in the stack navigator
+    const {routeName}= navigation.state.routes[navigation.state.index];
+    return {
+      headerTitle:routeName
+    }
+  }
+})
+
+const DashboardStackNavigator =createStackNavigator({
+  DashboardTabNavigator
+}, {
+  defaultNavigationOptions: ({ navigation}) => {
+    return {
+      headerLeft: <Icon style={{paddingLeft: 10}} name="md-menu" size={30} />
+    }
+  }
+})
+
 const AppDrawerNavigator = createDrawerNavigator({
-  Dashboard: DashboardScreen
+  Dashboard: DashboardStackNavigator
 })
 
 const AppSwitchNavigator = createSwitchNavigator({
