@@ -48,10 +48,13 @@ class DashboardScreen extends Component {
   }
 }
 
+const AppDrawerNavigator = createDrawerNavigator({
+  Dashboard: DashboardScreen
+})
 
 const AppSwitchNavigator = createSwitchNavigator({
-  Welcome: { screen: WelcomeScreen },
-  Dashboard: { screen: DashboardScreen }
+  Welcome: WelcomeScreen ,
+  Dashboard:AppDrawerNavigator
 });
 
 const AppContainer = createAppContainer(AppSwitchNavigator);
